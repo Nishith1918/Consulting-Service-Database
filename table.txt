@@ -1,0 +1,43 @@
+
+CREATE TABLE `professor` (
+  `profnr` int(11) NOT NULL,
+	`profname` varchar(15) NOT NULL,
+  PRIMARY KEY (`profnr`),
+  KEY `profnr` (`profnr`))
+
+ insert into professor(profnr,profname) values(1,"John")
+insert into professor(profnr,profname) values(2,"Dan")
+insert into professor(profnr,profname) values(3,"Jude")
+insert into professor(profnr,profname) values(4,"Harry")
+
+CREATE TABLE `Course` (
+  `courseNr` int(11) NOT NULL,
+  `courseName` varchar(15) NOT NULL,
+  `profnr` int(11) NOT NULL,
+  PRIMARY KEY (`courseNr`),
+  KEY `profnr` (`profnr`),
+  CONSTRAINT `course_ibfk_1` FOREIGN KEY (`profnr`) REFERENCES `Professor` (`profnr`))
+  
+  
+  insert into course(courseNr,courseName,profnr) values(111,"Principles",1)
+  insert into course(courseNr,courseName,profnr) values(112,"Maths",2)
+  insert into course(courseNr,courseName,profnr) values(113,"History",3)
+  insert into course(courseNr,courseName,profnr) values(114,"English",4)
+  insert into course(courseNr,courseName,profnr) values(115,"Physics",1)
+  insert into course(courseNr,courseName,profnr) values(116,"Biology",1)
+  
+  
+  CREATE TABLE `PreRequisite` (
+  `courseNr` int(11) NOT NULL,
+  `prereqcoursenr` int(11) NOT NULL,
+  KEY `courseNr` (`courseNr`),
+  CONSTRAINT `prereq_ibfk_1` FOREIGN KEY (`courseNr`) REFERENCES `course` (`courseNr`),
+  CONSTRAINT `prereq__ibfk_2` FOREIGN KEY (`prereqcoursenr`) REFERENCES `course` (`courseNr`))
+  
+  
+  
+  insert into PreRequisite(courseNr,prereqcoursenr) values(111,113)
+  insert into PreRequisite(courseNr,prereqcoursenr) values(113,114)
+  insert into PreRequisite(courseNr,prereqcoursenr) values(111,112)
+  insert into PreRequisite(courseNr,prereqcoursenr) values(112,115)
+  insert into PreRequisite(courseNr,prereqcoursenr) values(115,116)
